@@ -7,6 +7,11 @@
   training.demo.diskspace:
     path: /tmp
     storage: true
+  register: output
+
+- name: disk stat output
+  debug:
+    msg: "{{ output }}"
 
 - name: end
   debug:
