@@ -1,11 +1,26 @@
 ---
+scenario:
+  name: default
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
 dependency:
   name: galaxy
 driver:
   name: podman
 platforms:
   - name: instance
-    image: docker.io/pycontribs/centos:8
+    image: docker.io/pycontribs/centos:7
     pre_build_image: true
 provisioner:
   name: ansible

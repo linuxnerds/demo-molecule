@@ -13,4 +13,4 @@ install:
   - pip install molecule-podman
   - pip install ansible-core==2.11.2
 script:
-  - molecule test --scenario-name rhel8
+  - molecule test
