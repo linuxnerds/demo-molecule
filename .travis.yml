@@ -4,7 +4,9 @@ services:
   - podman
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y podman
+  - sudo apt-get -qq --yes install podman
+
+
 install:
   - pip install molecule
   - pip install molecule-podman
