@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  role_name: diskstat
+  namespace: linuxnerds
+  author: P-sharp & Mouse
+  description: Molecule demo
+  company: Red Hat
+  version: 1.0.0
+  license: license (GPL-3.0)
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 8
+  galaxy_tags:
+    - diskstat

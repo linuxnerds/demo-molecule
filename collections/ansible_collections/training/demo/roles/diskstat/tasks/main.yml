@@ -1,0 +1,13 @@
+---
+- name: start
+  debug:
+    msg: "Start disk stat"
+
+- name: diskspace module
+  training.demo.diskspace:
+    path: /tmp
+    storage: true
+
+- name: end
+  debug:
+    msg: "End disk stat"
