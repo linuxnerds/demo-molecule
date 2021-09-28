@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include demo-molecule"
+    - name: "Include diskstat role"
       include_role:
-        name: "demo-molecule"
+        name: "training.demo.diskstat"
