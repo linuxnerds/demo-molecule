@@ -1,14 +1,14 @@
-env:
-  global:
-    - COLLECTION_NAMESPACE: molecule
-    - COLLECTION_NAME: demo
+sudo: required
+language: python
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y software-properties-common
+  - sudo add-apt-repository -y ppa:projectatomic/ppa
+  - sudo apt-get update
+  - sudo apt-get install -y podman
+  - pwd
 
-before_script:
-  # Move the collection into the required path.
-  - cd ../
-  - mkdir -p ansible_collections/$COLLECTION_NAMESPACE
-  - mv ansible-collection-$COLLECTION_NAME ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-  - cd ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-
+install:
+  - pip install -r requirements.txt
 script:
-  - echo "Build start"
+  - molecule test
