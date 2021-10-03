@@ -4,11 +4,11 @@
 :toc2:
 :numbered:
 :blog_name:
-:description: Testing Ansible Collection Roles with Molecule & integration with Travis CI
+:description: Testing Ansible Collection Roles with Molecule & Integration with Travis CI
 :keywords: molecule, ansible collection, travis-ci
 
 
-= Testing Ansible Collection Roles with Molecule and integration with Travis CI
+= Testing Ansible Collection Roles with Molecule & Integration with Travis CI
 Prakhar Srivastava <psrivast@redhat.com>; Mitesh Sharma <mitsharm@redhat.com>
 
 == Authors
