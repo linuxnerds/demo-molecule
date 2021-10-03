@@ -434,7 +434,7 @@ The journey to overcome all the challenges was quite overwhelming for us. We wou
 
 We will soon be bringing a blog for Tekton CI running on Red Hat Openshift 4.x and making a molecule to do its testing magic.  
 
-=== Document Disclaimer 
+== Document Disclaimer 
 
 .DISCLAIMER DATA PRIVACY
 [%collapsible]
