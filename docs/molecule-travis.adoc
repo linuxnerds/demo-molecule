@@ -3,11 +3,30 @@
 :linkattrs:
 :toc2:
 :numbered:
-:blog_name: Testing Ansible Collection Roles with Molecule and integration with Travis CI using Github Actions
-:description: Testing Ansible Collection Roles with Molecule and integration with Travis CI using Github Actions
+:blog_name:
+:description: Testing Ansible Collection Roles with Molecule & integration with Travis CI
 :keywords: molecule, ansible collection, travis-ci
 
-= {blog_name}
+
+= Testing Ansible Collection Roles with Molecule and integration with Travis CI
+Prakhar Srivastava <psrivast@redhat.com>; Mitesh Sharma <mitsharm@redhat.com>
+
+== Authors
+image::./images/prakhar.png[Prakhar,150,150]
+.About {author_1}
+[%collapsible]
+====
+Is *Senior Architect* in Product Field Enablement *(PFE)* team based out of Sydney, Australia. He has been with Red Hat since 2017. He is SME for *Red Hat Automation Platform and Red Hat Openshift*. He helps in enabling partners and internals on Red Hat products.
+====
+
+image::./images/mitesh.png[Mitesh,150,150]
+.About {author_2}
+[%collapsible]
+====
+Is *architect* in Product Field Enablement *(PFE)* team based out of Kanpur,India. He has been with Red Hat since 2018. He is expert for *Red Hat Automation Platform*. He helps in enabling partners and internals on Red Hat products.
+====
+
+
 
 == Introduction
 
@@ -98,9 +117,12 @@ $ tree demo-molecule/
 ├── README.adoc
 └── requirements.txt
 ----
-
+:icons: image
+:iconsdir: images/icons
 [NOTE]
-In our team mostly, we use RHEL 8.x as our development systems, so everything which you see here is based on running CLI on RHEL 8.x. 
+In our team mostly, we use RHEL 8.x as our development systems, so everything which you see here is based on running CLI on RHEL 8.x.
+
+:icons: font
 
 * We started by creating a python3 virtual environment called demo, and installed all the packages needed for Molecule. We would recommend creating a virtual environment for your own testing. In the python3 virtualenv we installed ansible, molecule==3.5.1 and molecule-podman==1.0.1 packages. You can use requirements.txt from the cloned repository to install packages. 
 
@@ -193,8 +215,8 @@ molecule
 
 1 directory, 4 files
 ----
-
-<1> Let’s talk about converge.yml, it is the playbook file where we defined our role diskstat using FQCN. Molecule will invoke converge.yml to run playbook against the instance created by Podman driver.
++
+. Let’s talk about converge.yml, it is the playbook file where we defined our role diskstat using FQCN. Molecule will invoke converge.yml to run playbook against the instance created by Podman driver.
 +
 [source,ssh]
 ----
@@ -208,8 +230,7 @@ $ cat molecule/default/converge.yml
         name: "training.demo.diskstat"
 ----
 
-
-<2> Next step was to configure molecule.yml, it is the central configuration entrypoint for Molecule. With this file, you can configure each tool that Molecule will employ when testing your role. 
+. Next step was to configure molecule.yml, it is the central configuration entrypoint for Molecule. With this file, you can configure each tool that Molecule will employ when testing your role. 
 +
 We did not really want to run a full stack of test sequences so We customised the  test_sequence according to our requirements.
 +
@@ -244,10 +265,9 @@ provisioner:
   name: ansible
 verifier:
   name: ansible
-
 ----
-
-<3> Molecule handles role testing by invoking configurable verifiers using verify.yml. For our test use case we did not bother to touch it. 
++
+3 Molecule handles role testing by invoking configurable verifiers using verify.yml. For our test use case we did not bother to touch it. 
 
 * Here comes the war and we were ready to see if the molecule test command works to test our Ansible collection and role defined in the collection.
 +
@@ -281,21 +301,21 @@ Many of you guys must be using Jenkins, Travis or Tekton for organizational CI n
 
 It’s not rocket science to make GitHub and Travis work together. We thought let us show how we set up Github and Travis. And then use a .travis file to configure the molecule.  
 
-. Let us start with configuring Github by clicking on Settings .
+* Let us start with configuring Github by clicking on Settings .
 
 +
 ====
 image::./images/github_repository_settings.png[]
 ====
 
-. Click on branches and then click on add rule button
+* Click on branches and then click on add rule button
 +
 ====
 image::./images/github_branch_add_rule.png[]
 ====
 
-. Type main in Branch name pattern box
-. Select Require a pull request before merging or modify rules as per your requirement and then click Create button.
+* Type main in Branch name pattern box
+* Select Require a pull request before merging or modify rules as per your requirement and then click Create button.
 
 
 In the above steps we configured Github branch main  to not allow Merging before a Pull request is created from a feature branch by a developer.
@@ -303,32 +323,32 @@ In the above steps we configured Github branch main  to not allow Merging before
 
 Let's move to the next step to configure Travis CI and authorise it to Read content from our GitHub repository.
 
-. Go to travis-ci.com
-. Sign-in with Github account
+* Go to travis-ci.com
+* Sign-in with Github account
 +
 ====
 image::./images/travis_signin.png[]
 ====
 
-. Go to settings
+* Go to settings
 +
 ====
 image::./images/travis_settings.png[]
 ====
 
-. Click on Repositories -> Activate button
+* Click on Repositories -> Activate button
 +
 ====
 image::./images/travis_repository_activate.png[]
 ====
 
-. Select Only select repository and select demo-molecule (forked repository), then click Approve & install
+* Select Only select repository and select demo-molecule (forked repository), then click Approve & install
 +
 ====
 image::./images/travis_appprove_install.png[]
 ====
 
-. Click Repositories -> demo-molecule
+* Click Repositories -> demo-molecule
 
 Spot on we are done, now Travis can look after GitHub Repositories as soon as a PR gets created. 
 
@@ -359,14 +379,14 @@ script:
 
 For testing purposes, we created a demo branch and created a PR to verify Molecule is running tests on the PR before our Approver can Merge in the main branch. 
 
-. Create feature Branch demo
+* Create feature Branch demo
 [source,ssh]
 ----
 $ cd demo-molecule
 $ git checkout -b demo
 ----
 
-. Make a change in README.adoc file 
+* Make a change in README.adoc file 
 
 [source,ssh]
 ----
@@ -375,7 +395,7 @@ Demo
 EOF
 ----
 
-. Pushed the changes in demo branch 
+* Pushed the changes in demo branch 
 [source,ssh]
 ----
 $ git add README.adoc 
@@ -383,18 +403,18 @@ $ git commit -m "Modify Readme"
 $ git push --set-upstream origin demo
 ----
 
-. Create Pull Request from demo branch to main branch 
+* Create Pull Request from demo branch to main branch 
 
-.. GitHub forked repository
-.. Click Pull requests and then click New pull request
-.. Select main for base branch and demo for compare
+** GitHub forked repository
+** Click Pull requests and then click New pull request
+** Select main for base branch and demo for compare
 
 +
 ====
 image::./images/github_new_pull_request.png[]
 ====
 
-.  Then click on Create pull request and again click on Create pull request button
+* Then click on Create pull request and again click on Create pull request button
 +
 ====
 image::./images/github_travis_check.png[]
@@ -402,7 +422,7 @@ image::./images/github_travis_check.png[]
 
 Boom!!!! Here comes CI to run Molecule tests on Pull Request.
 
-. Just to check, that molecule really did the magic of testing the PR on Travis CI. 
+* Just to check, that molecule really did the magic of testing the PR on Travis CI. 
 +
 ====
 image::./images/travis_PR.png[]
@@ -414,3 +434,35 @@ The journey to overcome all the challenges was quite overwhelming for us. We wou
 
 We will soon be bringing a blog for Tekton CI running on Red Hat Openshift 4.x and making a molecule to do its testing magic.  
 
+=== Document Disclaimer 
+
+.DISCLAIMER DATA PRIVACY
+[%collapsible]
+====
+. Information collected through this site is kept confidential and is not passed to third party organizations for marketing or promotional purposes.
+
+. Unless otherwise stated, the material published within this website is copyright of the authors. The intention of these pages is to inform the general public.
+
+. You may download, display, print and reproduce this material.
+====
+
+.DISCLAIMER HYPERLINKS
+[%collapsible]
+====
+. Hypertext links to sites outside this website are provided as a convenience to users and should not necessarily be construed as an endorsement. Although every care is taken to provide links to suitable material from this site, the nature of the Internet prevents the author from guaranteeing the suitability or accuracy of any of the material that this site may be linked to. Consequently, the author can accept no responsibility for unsuitable or inaccurate material that may be encountered and accepts no liability whether direct or indirect for any loss or damage a person suffers because that person had directly or indirectly relied on any information stored in the hypertext links.
+====
+
+.DISCLAIMER ACCURACY
+[%collapsible]
+====
+. Further, the author is not and can not be responsible for the accuracy or legitimacy of information found elsewhere on the Internet and there is therefore no guarantee or warranty that any of the sites listed will be available at any particular time. The author does not guarantee or warrant any services that might be announced – use at your own risk.
+[%collapsible]
+====
+
+.DISCLAIMER THIRD PARTIES LOGO
+[%collapsible]
+====
+. All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
+
+. All specifications are subject to change without notice.
+====
